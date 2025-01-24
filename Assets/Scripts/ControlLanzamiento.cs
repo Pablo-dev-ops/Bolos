@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class ControlLanzamiento : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class ControlLanzamiento : MonoBehaviour
             {
                 Invoke("LanzaBola", 0.2f);
                 presionando = false;
+                Invoke("FinLanzamiento", 7.5f);
             }
             else
                 return;
@@ -57,12 +59,16 @@ public class ControlLanzamiento : MonoBehaviour
     private void LanzaBola ()
     {
       rbBola.isKinematic=false;
-        Invoke("CortarCuerda", 0.5f);
+        Invoke("CortarCuerda", 0.3f);
 
     }
     private void CortarCuerda()
     {
         pivote.enabled = false;
         rbPivote = null;
+    }
+    private void FinLanzamiento()
+    {
+        SceneManager.LoadScene("Conteo");
     }
 }
